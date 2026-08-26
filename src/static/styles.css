@@ -40,6 +40,10 @@ body.dark-mode {
   --border: #3b3b3b;
   --border-light: #2a2a2a;
   --border-focus: #4f4f4f;
+  --error: #ef9a9a;
+  --error-light: #3e1111;
+  --info: #81d4fa;
+  --info-light: #0f2f3c;
 }
 
 * {
