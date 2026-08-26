@@ -370,7 +370,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const activityDescription = (details.description || "")
       .replace(/\s+/g, " ")
-      .trim();
+      .trim()
+      .slice(0, 160);
     const shareText = `Check out ${activityName} at Mergington High School! ${activityDescription}`;
     const shareMessage = `${shareText} ${shareUrl.toString()}`;
     const emailBody = `${shareText}\n\n${shareUrl.toString()}`;
@@ -556,10 +557,10 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="share-section" aria-label="Share this activity">
         <span class="share-label">Share with friends:</span>
         <div class="share-buttons">
-          <a class="share-button facebook-share" href="${shareLinks.facebook}" target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">Facebook</a>
-          <a class="share-button x-share" href="${shareLinks.x}" target="_blank" rel="noopener noreferrer" aria-label="Share on X">X</a>
-          <a class="share-button whatsapp-share" href="${shareLinks.whatsapp}" target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">WhatsApp</a>
-          <a class="share-button email-share" href="${shareLinks.email}" aria-label="Share by email">Email</a>
+          <a class="share-button facebook-share" href="#" target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">Facebook</a>
+          <a class="share-button x-share" href="#" target="_blank" rel="noopener noreferrer" aria-label="Share on X">X</a>
+          <a class="share-button whatsapp-share" href="#" target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">WhatsApp</a>
+          <a class="share-button email-share" href="#" aria-label="Share by email">Email</a>
         </div>
       </div>
       <div class="participants-list">
@@ -610,6 +611,11 @@ document.addEventListener("DOMContentLoaded", () => {
     deleteButtons.forEach((button) => {
       button.addEventListener("click", handleUnregister);
     });
+
+    activityCard.querySelector(".facebook-share").href = shareLinks.facebook;
+    activityCard.querySelector(".x-share").href = shareLinks.x;
+    activityCard.querySelector(".whatsapp-share").href = shareLinks.whatsapp;
+    activityCard.querySelector(".email-share").href = shareLinks.email;
 
     // Add click handler for register button (only when authenticated)
     if (currentUser) {
