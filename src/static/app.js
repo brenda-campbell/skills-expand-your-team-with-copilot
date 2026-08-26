@@ -372,7 +372,9 @@ document.addEventListener("DOMContentLoaded", () => {
       .replace(/\s+/g, " ")
       .trim()
       .slice(0, 160);
-    const shareText = `Check out ${activityName} at Mergington High School! ${activityDescription}`;
+    const shareText = activityDescription
+      ? `Check out ${activityName} at Mergington High School! ${activityDescription}`
+      : `Check out ${activityName} at Mergington High School!`;
     const shareMessage = `${shareText} ${shareUrl.toString()}`;
     const emailBody = `${shareText}\n\n${shareUrl.toString()}`;
     const encodedUrl = encodeURIComponent(shareUrl.toString());
@@ -612,10 +614,16 @@ document.addEventListener("DOMContentLoaded", () => {
       button.addEventListener("click", handleUnregister);
     });
 
-    activityCard.querySelector(".facebook-share").href = shareLinks.facebook;
-    activityCard.querySelector(".x-share").href = shareLinks.x;
-    activityCard.querySelector(".whatsapp-share").href = shareLinks.whatsapp;
-    activityCard.querySelector(".email-share").href = shareLinks.email;
+    activityCard
+      .querySelector(".facebook-share")
+      .setAttribute("href", shareLinks.facebook);
+    activityCard.querySelector(".x-share").setAttribute("href", shareLinks.x);
+    activityCard
+      .querySelector(".whatsapp-share")
+      .setAttribute("href", shareLinks.whatsapp);
+    activityCard
+      .querySelector(".email-share")
+      .setAttribute("href", shareLinks.email);
 
     // Add click handler for register button (only when authenticated)
     if (currentUser) {
