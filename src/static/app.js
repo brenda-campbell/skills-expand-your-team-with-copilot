@@ -368,17 +368,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const shareUrl = new URL(window.location.origin + window.location.pathname);
     shareUrl.searchParams.set("activity", activityName);
 
-    const shareText = `Check out ${activityName} at Mergington High School! ${details.description}`;
+    const activityDescription = (details.description || "")
+      .replace(/\s+/g, " ")
+      .trim();
+    const shareText = `Check out ${activityName} at Mergington High School! ${activityDescription}`;
+    const shareMessage = `${shareText} ${shareUrl.toString()}`;
+    const emailBody = `${shareText}\n\n${shareUrl.toString()}`;
     const encodedUrl = encodeURIComponent(shareUrl.toString());
     const encodedText = encodeURIComponent(shareText);
 
     return {
       facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
       x: `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`,
-      whatsapp: `https://wa.me/?text=${encodedText}%20${encodedUrl}`,
+      whatsapp: `https://wa.me/?text=${encodeURIComponent(shareMessage)}`,
       email: `mailto:?subject=${encodeURIComponent(
         `Mergington activity: ${activityName}`
-      )}&body=${encodedText}%0A%0A${encodedUrl}`,
+      )}&body=${encodeURIComponent(emailBody)}`,
     };
   }
 
